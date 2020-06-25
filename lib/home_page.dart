@@ -20,11 +20,30 @@ class _HomePageState extends State<HomePage> {
 
   int _selectedIndex = 0;
 
+  static List<Widget> _screens = <Widget>[
+    Container(
+      color: Colors.amberAccent,
+    ),
+    Container(
+      color: Colors.blueAccent,
+    ),
+    Container(
+      color: Colors.greenAccent,
+    ),
+    Container(
+      color: Colors.deepPurpleAccent,
+    ),
+    Container(
+      color: Colors.cyanAccent,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.amberAccent,
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
