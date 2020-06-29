@@ -7,7 +7,7 @@ class FeedScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'instagram',
-          style: TextStyle(fontFamily: 'VeganStyle'),
+          style: TextStyle(fontFamily: 'VeganStyle', color: Colors.black87),
         ),
       ),
     );
