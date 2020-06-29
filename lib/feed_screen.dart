@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'instagram',
+          style: TextStyle(fontFamily: 'VeganStyle'),
+        ),
+      ),
+    );
   }
 }
