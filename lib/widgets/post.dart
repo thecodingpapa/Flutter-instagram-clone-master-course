@@ -18,9 +18,34 @@ class Post extends StatelessWidget {
     if (size == null) size = MediaQuery.of(context).size;
 
     return Column(
+      children: <Widget>[_postHeader(), _postImage(), _postActions()],
+    );
+  }
+
+  Row _postActions() {
+    return Row(
       children: <Widget>[
-        _postHeader(),
-        _postImage(),
+        IconButton(
+          onPressed: null,
+          icon: ImageIcon(AssetImage('assets/images/bookmark.png')),
+          color: Colors.black87,
+        ),
+        IconButton(
+          onPressed: null,
+          icon: ImageIcon(AssetImage('assets/images/comment.png')),
+          color: Colors.black87,
+        ),
+        IconButton(
+          onPressed: null,
+          icon: ImageIcon(AssetImage('assets/images/direct_message.png')),
+          color: Colors.black87,
+        ),
+        Spacer(),
+        IconButton(
+          onPressed: null,
+          icon: ImageIcon(AssetImage('assets/images/heart_selected.png')),
+          color: Colors.black87,
+        ),
       ],
     );
   }
