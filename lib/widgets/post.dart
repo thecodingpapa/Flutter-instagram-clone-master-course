@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagramtworecord/constants/common_size.dart';
 import 'package:instagramtworecord/widgets/my_progress_indicator.dart';
+import 'package:instagramtworecord/widgets/rounded_avatar.dart';
 
 class Post extends StatelessWidget {
   final int index;
@@ -29,13 +30,7 @@ class Post extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(common_xxs_gap),
-          child: ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: 'https://picsum.photos/100',
-              width: avatar_size,
-              height: avatar_size,
-            ),
-          ),
+          child: RoundedAvatar(),
         ),
         Expanded(child: Text('username')),
         IconButton(
