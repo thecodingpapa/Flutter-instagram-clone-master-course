@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagramtworecord/constants/common_size.dart';
+import 'package:instagramtworecord/constants/screen_size.dart';
 
 class ProfileBody extends StatefulWidget {
   @override
@@ -19,42 +20,61 @@ class _ProfileBodyState extends State<ProfileBody> {
               _username(),
               _userBio(),
               _editProfileBtn(),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: IconButton(
-                      icon: ImageIcon(
-                        AssetImage('assets/images/grid.png'),
-                        color: selectedLeft ? Colors.black : Colors.black26,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          selectedLeft = true;
-                        });
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: IconButton(
-                      icon: ImageIcon(
-                        AssetImage('assets/images/saved.png'),
-                        color: selectedLeft ? Colors.black26 : Colors.black,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          selectedLeft = false;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              )
+              _tabButtons(),
+              _selectedIndicator()
             ]),
           ),
         ],
       ),
     );
   }
+
+  Widget _selectedIndicator() {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      alignment: selectedLeft ? Alignment.centerLeft : Alignment.centerRight,
+      child: Container(
+        height: 3,
+        width: size.width / 2,
+        color: Colors.black87,
+      ),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
+  Row _tabButtons() {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: IconButton(
+            icon: ImageIcon(
+              AssetImage('assets/images/grid.png'),
+              color: selectedLeft ? Colors.black : Colors.black26,
+            ),
+            onPressed: () {
+              setState(() {
+                selectedLeft = true;
+              });
+            },
+          ),
+        ),
+        Expanded(
+          child: IconButton(
+            icon: ImageIcon(
+              AssetImage('assets/images/saved.png'),
+              color: selectedLeft ? Colors.black26 : Colors.black,
+            ),
+            onPressed: () {
+              setState(() {
+                selectedLeft = false;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
   Padding _editProfileBtn() {
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -75,6 +95,7 @@ class _ProfileBodyState extends State<ProfileBody> {
       ),
     );
   }
+
   Widget _username() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: common_gap),
@@ -84,6 +105,7 @@ class _ProfileBodyState extends State<ProfileBody> {
       ),
     );
   }
+
   Widget _userBio() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: common_gap),
