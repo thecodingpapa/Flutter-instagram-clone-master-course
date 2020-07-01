@@ -55,7 +55,6 @@ class _ProfileBodyState extends State<ProfileBody> {
       ),
     );
   }
-
   Padding _editProfileBtn() {
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -76,7 +75,6 @@ class _ProfileBodyState extends State<ProfileBody> {
       ),
     );
   }
-
   Widget _username() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: common_gap),
@@ -86,7 +84,6 @@ class _ProfileBodyState extends State<ProfileBody> {
       ),
     );
   }
-
   Widget _userBio() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: common_gap),
