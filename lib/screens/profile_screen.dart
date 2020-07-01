@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:instagramtworecord/constants/common_size.dart';
+import 'package:instagramtworecord/widgets/profile_body.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
@@ -12,19 +12,9 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _appbar(),
-            _username(),
+            ProfileBody(),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _username() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: common_gap),
-      child: Text(
-        'username',
-        style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
