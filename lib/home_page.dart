@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagramtworecord/feed_screen.dart';
+import 'package:instagramtworecord/screens/feed_screen.dart';
+import 'package:instagramtworecord/screens/profile_screen.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -32,9 +33,7 @@ class _HomePageState extends State<HomePage> {
     Container(
       color: Colors.deepPurpleAccent,
     ),
-    Container(
-      color: Colors.cyanAccent,
-    ),
+    ProfileScreen(),
   ];
 
   @override
