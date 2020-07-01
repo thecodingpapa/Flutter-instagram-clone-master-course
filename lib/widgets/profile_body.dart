@@ -8,7 +8,7 @@ class ProfileBody extends StatefulWidget {
 }
 
 class _ProfileBodyState extends State<ProfileBody> {
-  bool selectedLeft = true;
+  SelectedTab _selectedTab = SelectedTab.left;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,9 @@ class _ProfileBodyState extends State<ProfileBody> {
   Widget _selectedIndicator() {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
-      alignment: selectedLeft ? Alignment.centerLeft : Alignment.centerRight,
+      alignment: _selectedTab == SelectedTab.left
+          ? Alignment.centerLeft
+          : Alignment.centerRight,
       child: Container(
         height: 3,
         width: size.width / 2,
@@ -49,11 +51,13 @@ class _ProfileBodyState extends State<ProfileBody> {
           child: IconButton(
             icon: ImageIcon(
               AssetImage('assets/images/grid.png'),
-              color: selectedLeft ? Colors.black : Colors.black26,
+              color: _selectedTab == SelectedTab.left
+                  ? Colors.black
+                  : Colors.black26,
             ),
             onPressed: () {
               setState(() {
-                selectedLeft = true;
+                _selectedTab = SelectedTab.left;
               });
             },
           ),
@@ -62,11 +66,13 @@ class _ProfileBodyState extends State<ProfileBody> {
           child: IconButton(
             icon: ImageIcon(
               AssetImage('assets/images/saved.png'),
-              color: selectedLeft ? Colors.black26 : Colors.black,
+              color: _selectedTab == SelectedTab.left
+                  ? Colors.black26
+                  : Colors.black,
             ),
             onPressed: () {
               setState(() {
-                selectedLeft = false;
+                _selectedTab = SelectedTab.right;
               });
             },
           ),
@@ -116,3 +122,5 @@ class _ProfileBodyState extends State<ProfileBody> {
     );
   }
 }
+
+enum SelectedTab { left, right }
