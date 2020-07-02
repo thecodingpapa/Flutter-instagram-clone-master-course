@@ -2,9 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagramtworecord/constants/common_size.dart';
 import 'package:instagramtworecord/constants/screen_size.dart';
+import 'package:instagramtworecord/screens/profile_screen.dart';
 import 'package:instagramtworecord/widgets/rounded_avatar.dart';
 
 class ProfileBody extends StatefulWidget {
+  final Function onMenuChanged;
+
+  const ProfileBody({Key key, this.onMenuChanged}) : super(key: key);
+
   @override
   _ProfileBodyState createState() => _ProfileBodyState();
 }
@@ -16,50 +21,79 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: CustomScrollView(
-        slivers: <Widget>[
-          SliverList(
-            delegate: SliverChildListDelegate([
-              Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(common_gap),
-                    child: RoundedAvatar(
-                      size: 80,
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _appbar(),
+          Expanded(
+            child: CustomScrollView(
+              slivers: <Widget>[
+                SliverList(
+                  delegate: SliverChildListDelegate([
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(common_gap),
+                          child: RoundedAvatar(
+                            size: 80,
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: common_gap),
+                            child: Table(
+                              children: [
+                                TableRow(children: [
+                                  _valueText('123123'),
+                                  _valueText('321123'),
+                                  _valueText('1223'),
+                                ]),
+                                TableRow(children: [
+                                  _labelText('Post'),
+                                  _labelText('Followers'),
+                                  _labelText('Following'),
+                                ]),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: common_gap),
-                      child: Table(
-                        children: [
-                          TableRow(children: [
-                            _valueText('123123'),
-                            _valueText('321123'),
-                            _valueText('1223'),
-                          ]),
-                          TableRow(children: [
-                            _labelText('Post'),
-                            _labelText('Followers'),
-                            _labelText('Following'),
-                          ]),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              _username(),
-              _userBio(),
-              _editProfileBtn(),
-              _tabButtons(),
-              _selectedIndicator()
-            ]),
+                    _username(),
+                    _userBio(),
+                    _editProfileBtn(),
+                    _tabButtons(),
+                    _selectedIndicator()
+                  ]),
+                ),
+                _imagesPager()
+              ],
+            ),
           ),
-          _imagesPager()
         ],
       ),
+    );
+  }
+
+  Row _appbar() {
+    return Row(
+      children: <Widget>[
+        SizedBox(
+          width: 44,
+        ),
+        Expanded(
+            child: Text(
+          'The Coding Papa',
+          textAlign: TextAlign.center,
+        )),
+        IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            widget.onMenuChanged();
+          },
+        )
+      ],
     );
   }
 
