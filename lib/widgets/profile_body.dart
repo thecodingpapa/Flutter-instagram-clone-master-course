@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagramtworecord/constants/common_size.dart';
 import 'package:instagramtworecord/constants/screen_size.dart';
+import 'package:instagramtworecord/widgets/rounded_avatar.dart';
 
 class ProfileBody extends StatefulWidget {
   @override
@@ -20,6 +21,35 @@ class _ProfileBodyState extends State<ProfileBody> {
         slivers: <Widget>[
           SliverList(
             delegate: SliverChildListDelegate([
+              Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(common_gap),
+                    child: RoundedAvatar(
+                      size: 80,
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: common_gap),
+                      child: Table(
+                        children: [
+                          TableRow(children: [
+                            _valueText('123123'),
+                            _valueText('321123'),
+                            _valueText('1223'),
+                          ]),
+                          TableRow(children: [
+                            _labelText('Post'),
+                            _labelText('Followers'),
+                            _labelText('Following'),
+                          ]),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
               _username(),
               _userBio(),
               _editProfileBtn(),
@@ -32,6 +62,20 @@ class _ProfileBodyState extends State<ProfileBody> {
       ),
     );
   }
+
+  Text _valueText(String value) => Text(
+        value,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      );
+
+  Text _labelText(String label) => Text(
+        label,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontWeight: FontWeight.w300, fontSize: 11),
+      );
 
   SliverToBoxAdapter _imagesPager() {
     return SliverToBoxAdapter(
