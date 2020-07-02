@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagramtworecord/constants/screen_size.dart';
 import 'package:instagramtworecord/widgets/profile_body.dart';
+import 'package:instagramtworecord/widgets/profile_side_menu.dart';
+
+const duration = Duration(milliseconds: 1000);
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -9,8 +12,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final duration = Duration(milliseconds: 300);
-  final menuWidth = size.width / 2;
+  final menuWidth = size.width / 3 * 2;
 
   MenuStatus _menuStatus = MenuStatus.closed;
   double bodyXPos = 0;
@@ -53,9 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   top: 0,
                   bottom: 0,
                   width: menuWidth,
-                  child: Container(
-                    color: Colors.deepPurpleAccent,
-                  )),
+                  child: ProfileSideMenu(menuWidth)),
             ),
           ],
         ));

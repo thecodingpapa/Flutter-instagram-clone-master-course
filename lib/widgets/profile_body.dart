@@ -116,13 +116,13 @@ class _ProfileBodyState extends State<ProfileBody> {
         child: Stack(
       children: <Widget>[
         AnimatedContainer(
-          duration: Duration(milliseconds: 300),
+          duration: duration,
           transform: Matrix4.translationValues(_leftImagesPageMargin, 0, 0),
           curve: Curves.fastOutSlowIn,
           child: _images(),
         ),
         AnimatedContainer(
-          duration: Duration(milliseconds: 300),
+          duration: duration,
           transform: Matrix4.translationValues(_rightImagesPageMargin, 0, 0),
           curve: Curves.fastOutSlowIn,
           child: _images(),
@@ -148,7 +148,7 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   Widget _selectedIndicator() {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
+      duration: duration,
       alignment: _selectedTab == SelectedTab.left
           ? Alignment.centerLeft
           : Alignment.centerRight,
