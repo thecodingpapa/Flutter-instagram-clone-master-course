@@ -10,6 +10,8 @@ class ProfileBody extends StatefulWidget {
 
 class _ProfileBodyState extends State<ProfileBody> {
   SelectedTab _selectedTab = SelectedTab.left;
+  double _leftImagesPageMargin = 0;
+  double _rightImagesPageMargin = size.width;
 
   @override
   Widget build(BuildContext context) {
@@ -25,21 +27,44 @@ class _ProfileBodyState extends State<ProfileBody> {
               _selectedIndicator()
             ]),
           ),
-          SliverToBoxAdapter(
-              child: GridView.count(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            crossAxisCount: 3,
-            childAspectRatio: 1,
-            children: List.generate(
-                30,
-                (index) => CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      imageUrl: "https://picsum.photos/id/$index/100/100",
-                    )),
-          ))
+          _imagesPager()
         ],
       ),
+    );
+  }
+
+  SliverToBoxAdapter _imagesPager() {
+    return SliverToBoxAdapter(
+        child: Stack(
+      children: <Widget>[
+        AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          transform: Matrix4.translationValues(_leftImagesPageMargin, 0, 0),
+          curve: Curves.fastOutSlowIn,
+          child: _images(),
+        ),
+        AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          transform: Matrix4.translationValues(_rightImagesPageMargin, 0, 0),
+          curve: Curves.fastOutSlowIn,
+          child: _images(),
+        ),
+      ],
+    ));
+  }
+
+  GridView _images() {
+    return GridView.count(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      crossAxisCount: 3,
+      childAspectRatio: 1,
+      children: List.generate(
+          30,
+          (index) => CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: "https://picsum.photos/id/$index/100/100",
+              )),
     );
   }
 
@@ -72,6 +97,8 @@ class _ProfileBodyState extends State<ProfileBody> {
             onPressed: () {
               setState(() {
                 _selectedTab = SelectedTab.left;
+                _leftImagesPageMargin = 0;
+                _rightImagesPageMargin = size.width;
               });
             },
           ),
@@ -87,6 +114,8 @@ class _ProfileBodyState extends State<ProfileBody> {
             onPressed: () {
               setState(() {
                 _selectedTab = SelectedTab.right;
+                _leftImagesPageMargin = -size.width;
+                _rightImagesPageMargin = 0;
               });
             },
           ),
