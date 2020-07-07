@@ -30,18 +30,39 @@ class _AuthScreenState extends State<AuthScreen> {
               child: currentWidget,
               duration: duration,
             ),
-            Container(
-              child: FlatButton(
-                onPressed: () {
-                  setState(() {
-                    if (currentWidget is SignUpForm) {
-                      currentWidget = signInForm;
-                    } else {
-                      currentWidget = signUpForm;
-                    }
-                  });
-                },
-                child: Text('go to Sign up'),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                color: Colors.white,
+                child: FlatButton(
+                  onPressed: () {
+                    setState(() {
+                      if (currentWidget is SignUpForm) {
+                        currentWidget = signInForm;
+                      } else {
+                        currentWidget = signUpForm;
+                      }
+                    });
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                        text: (currentWidget is SignUpForm)
+                            ? "Already have an account? "
+                            : "Don't have an account? ",
+                        style: TextStyle(color: Colors.grey),
+                        children: [
+                          TextSpan(
+                              text: (currentWidget is SignUpForm)
+                                  ? "Sign In "
+                                  : "Sing Up",
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold)),
+                        ]),
+                  ),
+                ),
               ),
             ),
           ],
