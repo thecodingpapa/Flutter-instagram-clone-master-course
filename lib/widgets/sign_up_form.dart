@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagramtworecord/constants/common_size.dart';
+import 'package:instagramtworecord/home_page.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -84,6 +85,8 @@ class _SignUpFormState extends State<SignUpForm> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     print('Validation success!!');
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => HomePage()));
                   }
                 },
                 child: Text(
