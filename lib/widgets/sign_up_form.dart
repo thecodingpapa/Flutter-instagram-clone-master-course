@@ -35,6 +35,7 @@ class _SignUpFormState extends State<SignUpForm> {
             Image.asset('assets/images/insta_text_logo.png'),
             TextFormField(
               controller: _emailController,
+              cursorColor: Colors.black54,
               decoration: _textInputDecor('Email'),
               validator: (text) {
                 if (text.isNotEmpty && text.contains("@")) {
@@ -49,9 +50,11 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             TextFormField(
               controller: _pwController,
+              cursorColor: Colors.black54,
+              obscureText: true,
               decoration: _textInputDecor('Password'),
               validator: (text) {
-                if (text.isNotEmpty && text.length > 5) {
+                if (text.isNotEmpty && text.length > 2) {
                   return null;
                 } else {
                   return '제대로 된 비밀번호 입력해주세용~';
@@ -63,6 +66,8 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             TextFormField(
               controller: _cpwController,
+              cursorColor: Colors.black54,
+              obscureText: true,
               decoration: _textInputDecor('Confirm Password'),
               validator: (text) {
                 if (text.isNotEmpty && _pwController.text == text) {
@@ -72,6 +77,20 @@ class _SignUpFormState extends State<SignUpForm> {
                 }
               },
             ),
+            FlatButton(
+              color: Colors.blue,
+              onPressed: () {
+                if (_formKey.currentState.validate()) {
+                  print('Validation success!!');
+                }
+              },
+              child: Text(
+                'Join',
+                style: TextStyle(color: Colors.white),
+              ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6)),
+            )
           ],
         ),
       ),
@@ -82,6 +101,17 @@ class _SignUpFormState extends State<SignUpForm> {
     return InputDecoration(
         hintText: hint,
         enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey[300],
+          ),
+          borderRadius: BorderRadius.circular(common_s_gap),
+        ),
+        errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.redAccent,
+            ),
+            borderRadius: BorderRadius.circular(common_s_gap)),
+        focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.grey[300],
             ),
