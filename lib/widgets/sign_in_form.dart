@@ -64,6 +64,16 @@ class _SignInFormState extends State<SignInForm> {
                   }
                 },
               ),
+              FlatButton(
+                onPressed: () {},
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    'Forgotten Password?',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: common_s_gap,
               ),
