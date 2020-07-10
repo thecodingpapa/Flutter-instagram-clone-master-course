@@ -11,8 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: AuthScreen(),
-//      home: HomePage(),
+      home: HomePage(),
       theme: ThemeData(primarySwatch: white),
     );
   }
