@@ -61,8 +61,7 @@ class _HomePageState extends State<HomePage> {
   void _onBtmItemClick(int index) {
     switch (index) {
       case 2:
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => CameraScreen()));
+        _openCamera();
         break;
       default:
         {
@@ -72,5 +71,10 @@ class _HomePageState extends State<HomePage> {
           });
         }
     }
+  }
+
+  void _openCamera() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => CameraScreen()));
   }
 }
