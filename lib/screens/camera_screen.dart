@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagramtworecord/widgets/take_photo.dart';
 
 class CameraScreen extends StatefulWidget {
   @override
@@ -28,9 +29,7 @@ class _CameraScreenState extends State<CameraScreen> {
           Container(
             color: Colors.cyanAccent,
           ),
-          Container(
-            color: Colors.amberAccent,
-          ),
+          TakePhoto(),
           Container(
             color: Colors.greenAccent,
           ),
