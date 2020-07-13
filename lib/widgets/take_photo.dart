@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagramtworecord/constants/common_size.dart';
 import 'package:instagramtworecord/constants/screen_size.dart';
 
 class TakePhoto extends StatelessWidget {
