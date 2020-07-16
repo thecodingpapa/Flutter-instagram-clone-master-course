@@ -5,6 +5,7 @@ import 'package:instagramtworecord/constants/screen_size.dart';
 import 'package:instagramtworecord/widgets/comment.dart';
 import 'package:instagramtworecord/widgets/my_progress_indicator.dart';
 import 'package:instagramtworecord/widgets/rounded_avatar.dart';
+import 'package:provider/provider.dart';
 
 class Post extends StatelessWidget {
   final int index;
