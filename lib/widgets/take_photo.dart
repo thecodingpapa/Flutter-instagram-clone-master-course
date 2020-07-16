@@ -1,8 +1,11 @@
 import 'package:camera/camera.dart';
+import 'package:camera/new/src/support_android/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:instagramtworecord/constants/screen_size.dart';
 import 'package:instagramtworecord/models/camera_state.dart';
 import 'package:instagramtworecord/widgets/my_progress_indicator.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 class TakePhoto extends StatefulWidget {
@@ -33,7 +36,11 @@ class _TakePhotoState extends State<TakePhoto> {
             ),
             Expanded(
               child: OutlineButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (cameraState.isReadyToTakePhoto) {
+                    _attemptTakePhoto(cameraState);
+                  }
+                },
                 shape: CircleBorder(),
                 borderSide: BorderSide(color: Colors.black12, width: 20),
               ),
@@ -57,5 +64,15 @@ class _TakePhotoState extends State<TakePhoto> {
         ),
       ),
     );
+  }
+
+  void _attemptTakePhoto(CameraState cameraState) async {
+    final String timeInMilli = DateTime.now().millisecondsSinceEpoch.toString();
+    try {
+      final path =
+          join((await getTemporaryDirectory()).path, '$timeInMilli.png');
+
+      await cameraState.controller.takePicture(path);
+    } catch (e) {}
   }
 }
