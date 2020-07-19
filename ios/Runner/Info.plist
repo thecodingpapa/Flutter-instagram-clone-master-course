@@ -45,5 +45,7 @@
     <string>카메라좀 써도 될까용??</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>마이크 쓰게 해주면, 맛있는거 주지?</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>갤러리에서 사진 좀 사용할께?</string>
 </dict>
 </plist>
