@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:instagramtworecord/models/camera_state.dart';
+import 'package:instagramtworecord/models/gallery_state.dart';
 import 'package:instagramtworecord/widgets/my_gallery.dart';
 import 'package:instagramtworecord/widgets/take_photo.dart';
 import 'package:provider/provider.dart';
 
 class CameraScreen extends StatefulWidget {
   CameraState _cameraState = CameraState();
+  GalleryState _galleryState = GalleryState();
   @override
   _CameraScreenState createState() {
     _cameraState.getReadyToTakePhoto();
+    _galleryState.initProvider();
     return _CameraScreenState();
   }
 }
@@ -30,6 +33,7 @@ class _CameraScreenState extends State<CameraScreen> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<CameraState>.value(value: widget._cameraState),
+        ChangeNotifierProvider<GalleryState>.value(value: widget._galleryState),
       ],
       child: Scaffold(
         appBar: AppBar(

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:instagramtworecord/constants/screen_size.dart';
@@ -97,8 +99,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<bool> checkIfPermissionGranted(BuildContext context) async {
-    Map<Permission, PermissionStatus> statuses =
-        await [Permission.camera, Permission.microphone].request();
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.camera,
+      Permission.microphone,
+      Platform.isIOS ? Permission.photos : Permission.storage
+    ].request();
     bool permitted = true;
 
     statuses.forEach((permission, permissionStatus) {
