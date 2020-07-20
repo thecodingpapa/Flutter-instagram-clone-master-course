@@ -47,13 +47,9 @@ class _MyGalleryState extends State<MyGallery> {
               },
               child: Image(
                 image: DeviceImage(localImage),
+                fit: BoxFit.cover,
               ),
             ))
         .toList();
-  }
-
-  Future<Uint8List> localImageToBytes(
-      GalleryState galleryState, LocalImage localImage) {
-    return localImage.getScaledImageBytes(galleryState.localImageProvider, 0.3);
   }
 }
