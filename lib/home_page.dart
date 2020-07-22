@@ -6,6 +6,7 @@ import 'package:instagramtworecord/constants/screen_size.dart';
 import 'package:instagramtworecord/screens/camera_screen.dart';
 import 'package:instagramtworecord/screens/feed_screen.dart';
 import 'package:instagramtworecord/screens/profile_screen.dart';
+import 'package:instagramtworecord/screens/search_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,9 +32,7 @@ class _HomePageState extends State<HomePage> {
 
   static List<Widget> _screens = <Widget>[
     FeedScreen(),
-    Container(
-      color: Colors.blueAccent,
-    ),
+    SearchScreen(),
     Container(
       color: Colors.greenAccent,
     ),
