@@ -12,7 +12,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   FirebaseAuthState _firebaseAuthState = FirebaseAuthState();
-
+  Widget _currentWidget;
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<FirebaseAuthState>.value(
@@ -22,12 +22,19 @@ class MyApp extends StatelessWidget {
             FirebaseAuthState firebaseAuthState, Widget child) {
           switch (firebaseAuthState.firebaseAuthStatus) {
             case FirebaseAuthStatus.signout:
-              return AuthScreen();
+              _currentWidget = AuthScreen();
+              break;
             case FirebaseAuthStatus.signin:
-              return HomePage();
+              _currentWidget = HomePage();
+              break;
             default:
-              return MyProgressIndicator();
+              _currentWidget = MyProgressIndicator();
           }
+
+          return AnimatedSwitcher(
+            duration: Duration(milliseconds: 300),
+            child: _currentWidget,
+          );
         }),
         theme: ThemeData(primarySwatch: white),
       ),
