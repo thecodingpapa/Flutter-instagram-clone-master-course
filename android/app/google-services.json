@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "470733482055",
+    "firebase_url": "https://instaclon-v2-record.firebaseio.com",
+    "project_id": "instaclon-v2-record",
+    "storage_bucket": "instaclon-v2-record.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470733482055:android:10d86aca6acf5d08882962",
+        "android_client_info": {
+          "package_name": "com.thecodingpapa.instagramtworecord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470733482055-tv0qgagc2omv1qsliepdr8d63s125a23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcR2EgSii-MgCPQwTTpafaiIjF1GWi9Pg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470733482055-tv0qgagc2omv1qsliepdr8d63s125a23.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
