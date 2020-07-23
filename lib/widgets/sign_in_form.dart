@@ -106,7 +106,7 @@ class _SignInFormState extends State<SignInForm> {
         if (_formKey.currentState.validate()) {
           print('Validation success!!');
 
-          Provider.of<FirebaseAuthState>(context, listen: false).login(
+          Provider.of<FirebaseAuthState>(context, listen: false).login(context,
               email: _emailController.text, password: _pwController.text);
         }
       },
