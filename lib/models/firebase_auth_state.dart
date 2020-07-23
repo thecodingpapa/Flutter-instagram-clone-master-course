@@ -17,6 +17,15 @@ class FirebaseAuthState extends ChangeNotifier {
     });
   }
 
+  void registerUser({@required String email, @required String password}) {
+    _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
+  }
+
+  void login({@required String email, @required String password}) {
+    _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+  }
+
   void signOut() {
     _firebaseAuthStatus = FirebaseAuthStatus.signout;
     if (_firebaseUser != null) {

@@ -113,8 +113,8 @@ class _SignUpFormState extends State<SignUpForm> {
       onPressed: () {
         if (_formKey.currentState.validate()) {
           print('Validation success!!');
-          Provider.of<FirebaseAuthState>(context, listen: false)
-              .changeFirebaseAuthStatus(FirebaseAuthStatus.signin);
+          Provider.of<FirebaseAuthState>(context, listen: false).registerUser(
+              email: _emailController.text, password: _pwController.text);
         }
       },
       child: Text(

@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget _currentWidget;
   @override
   Widget build(BuildContext context) {
+    _firebaseAuthState.watchAuthChange();
     return ChangeNotifierProvider<FirebaseAuthState>.value(
       value: _firebaseAuthState,
       child: MaterialApp(
