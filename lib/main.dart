@@ -18,21 +18,17 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<FirebaseAuthState>.value(
       value: _firebaseAuthState,
       child: MaterialApp(
-        home: Consumer<FirebaseAuthState>(
-            builder: (BuildContext context, FirebaseAuthState firebaseAuthState,
-                Widget child) {
-              switch (firebaseAuthState.firebaseAuthStatus) {
-                case FirebaseAuthStatus.signout:
-                  return AuthScreen();
-                case FirebaseAuthStatus.progress:
-                  return MyProgressIndicator();
-                case FirebaseAuthStatus.signin:
-                  return HomePage();
-                default:
-                  return MyProgressIndicator();
-              }
-            },
-            child: HomePage()),
+        home: Consumer<FirebaseAuthState>(builder: (BuildContext context,
+            FirebaseAuthState firebaseAuthState, Widget child) {
+          switch (firebaseAuthState.firebaseAuthStatus) {
+            case FirebaseAuthStatus.signout:
+              return AuthScreen();
+            case FirebaseAuthStatus.signin:
+              return HomePage();
+            default:
+              return MyProgressIndicator();
+          }
+        }),
         theme: ThemeData(primarySwatch: white),
       ),
     );
