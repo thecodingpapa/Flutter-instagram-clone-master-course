@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:instagramtworecord/utils/simple_snackbar.dart';
 
 class FirebaseAuthState extends ChangeNotifier {
   FirebaseAuthStatus _firebaseAuthStatus = FirebaseAuthStatus.signout;
@@ -101,6 +103,41 @@ class FirebaseAuthState extends ChangeNotifier {
       }
     }
 
+    notifyListeners();
+  }
+
+  void loginWithFacebook(BuildContext context) async {
+    final facebookLogin = FacebookLogin();
+    final result = await facebookLogin.logIn(['email']);
+
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        _handleFacebookTokenWithFirebase(context, result.accessToken.token);
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        simpleSnackbar(context, 'User cancel facebook sign in');
+        break;
+      case FacebookLoginStatus.error:
+        simpleSnackbar(context, '페북 로그인하는데 에러나떵~');
+        facebookLogin.logOut();
+        break;
+    }
+  }
+
+  void _handleFacebookTokenWithFirebase(
+      BuildContext context, String token) async {
+    final AuthCredential credential =
+        FacebookAuthProvider.getCredential(accessToken: token);
+
+    final AuthResult authResult =
+        await _firebaseAuth.signInWithCredential(credential);
+    final FirebaseUser user = authResult.user;
+
+    if (user == null) {
+      simpleSnackbar(context, '페북 로그인이 잘 안되떵~ 나중에 다시해봥~');
+    } else {
+      _firebaseUser = user;
+    }
     notifyListeners();
   }
 
