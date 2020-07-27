@@ -47,5 +47,36 @@
     <string>마이크 쓰게 해주면, 맛있는거 주지?</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>갤러리에서 사진 좀 사용할께?</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb2876194319158067</string>
+      </array>
+      </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>2876194319158067</string>
+    <key>FacebookDisplayName</key>
+    <string>instclon_v2_record</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>fbapi</string>
+      <string>fbapi20130214</string>
+      <string>fbapi20130410</string>
+      <string>fbapi20130702</string>
+      <string>fbapi20131010</string>
+      <string>fbapi20131219</string>
+      <string>fbapi20140410</string>
+      <string>fbapi20140116</string>
+      <string>fbapi20150313</string>
+      <string>fbapi20150629</string>
+      <string>fbapi20160328</string>
+      <string>fbauth</string>
+      <string>fb-messenger-share-api</string>
+      <string>fbauth2</string>
+      <string>fbshareextension</string>
+    </array>
 </dict>
 </plist>
