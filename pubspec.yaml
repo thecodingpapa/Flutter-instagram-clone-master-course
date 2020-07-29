@@ -38,6 +38,7 @@ dependencies:
   local_image_provider: ^2.1.0
   firebase_auth: ^0.16.1
   flutter_facebook_login: ^3.0.0
+  cloud_firestore: ^0.13.7
 
 dev_dependencies:
   flutter_test:
