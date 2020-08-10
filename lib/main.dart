@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
               userNetworkRepository
                   .getUserModelStream(firebaseAuthState.firebaseUser.uid)
                   .listen((userModel) {
-                Provider.of<UserModelState>(context).userModel = userModel;
+                Provider.of<UserModelState>(context, listen: false).userModel =
+                    userModel;
               });
               _currentWidget = HomePage();
               break;
