@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagramtworecord/models/user_model_state.dart';
 import 'package:instagramtworecord/repo/user_network_repository.dart';
 import 'package:instagramtworecord/widgets/post.dart';
+import 'package:provider/provider.dart';
 
 class FeedScreen extends StatelessWidget {
   @override
