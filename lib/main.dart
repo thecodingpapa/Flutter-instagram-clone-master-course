@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:instagramtworecord/constants/material_white.dart';
 import 'package:instagramtworecord/home_page.dart';
 import 'package:instagramtworecord/models/firebase_auth_state.dart';
+import 'package:instagramtworecord/models/user_model_state.dart';
+import 'package:instagramtworecord/repo/user_network_repository.dart';
 import 'package:instagramtworecord/screens/auth_screen.dart';
 import 'package:instagramtworecord/widgets/my_progress_indicator.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +18,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _firebaseAuthState.watchAuthChange();
-    return ChangeNotifierProvider<FirebaseAuthState>.value(
-      value: _firebaseAuthState,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<FirebaseAuthState>.value(
+            value: _firebaseAuthState),
+        ChangeNotifierProvider<UserModelState>(
+          create: (_) => UserModelState(),
+        ),
+      ],
       child: MaterialApp(
         home: Consumer<FirebaseAuthState>(builder: (BuildContext context,
             FirebaseAuthState firebaseAuthState, Widget child) {
@@ -26,6 +34,11 @@ class MyApp extends StatelessWidget {
               _currentWidget = AuthScreen();
               break;
             case FirebaseAuthStatus.signin:
+              userNetworkRepository
+                  .getUserModelStream(firebaseAuthState.firebaseUser.uid)
+                  .listen((userModel) {
+                Provider.of<UserModelState>(context).userModel = userModel;
+              });
               _currentWidget = HomePage();
               break;
             default:
