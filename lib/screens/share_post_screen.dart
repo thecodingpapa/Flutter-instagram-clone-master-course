@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tags/flutter_tags.dart';
 import 'package:instagramtworecord/constants/common_size.dart';
@@ -68,23 +69,35 @@ class SharePostScreen extends StatelessWidget {
             _sectionButton('Tag People'),
             _divider,
             _sectionButton('Add Location'),
-            Tags(
-              horizontalScroll: true,
-              itemCount: _tagItems.length,
-              heightHorizontalScroll: 30,
-              itemBuilder: (index) => ItemTags(
-                title: _tagItems[index],
-                index: index,
-                activeColor: Colors.grey[200],
-                textActiveColor: Colors.black87,
-                borderRadius: BorderRadius.circular(4),
-                elevation: 2,
-                splashColor: Colors.grey[800],
-                color: Colors.red,
-              ),
-            )
+            _tags(),
+            SizedBox(
+              height: common_s_gap,
+            ),
+            _divider,
+            SectionSwitch('Facebook'),
+            SectionSwitch('Instagram'),
+            SectionSwitch('Tumblr'),
+            _divider
           ],
         ));
+  }
+
+  Tags _tags() {
+    return Tags(
+      horizontalScroll: true,
+      itemCount: _tagItems.length,
+      heightHorizontalScroll: 30,
+      itemBuilder: (index) => ItemTags(
+        title: _tagItems[index],
+        index: index,
+        activeColor: Colors.grey[200],
+        textActiveColor: Colors.black87,
+        borderRadius: BorderRadius.circular(4),
+        elevation: 2,
+        splashColor: Colors.grey[800],
+        color: Colors.red,
+      ),
+    );
   }
 
   Divider get _divider => Divider(
@@ -120,6 +133,42 @@ class SharePostScreen extends StatelessWidget {
       title: TextField(
         decoration: InputDecoration(
             hintText: 'Write a caption...', border: InputBorder.none),
+      ),
+    );
+  }
+}
+
+class SectionSwitch extends StatefulWidget {
+  final String _title;
+  const SectionSwitch(
+    this._title, {
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _SectionSwitchState createState() => _SectionSwitchState();
+}
+
+class _SectionSwitchState extends State<SectionSwitch> {
+  bool checked = false;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        widget._title,
+        style: TextStyle(fontWeight: FontWeight.w400),
+      ),
+      trailing: CupertinoSwitch(
+        value: checked,
+        onChanged: (onValue) {
+          setState(() {
+            checked = onValue;
+          });
+        },
+      ),
+      dense: true,
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: common_gap,
       ),
     );
   }
