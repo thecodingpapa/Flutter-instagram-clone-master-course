@@ -1,19 +1,26 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:instagramtworecord/repo/helper/image_helper.dart';
 
 class ImageNetworkRepository {
-  Future<void> uploadImageNCreateNewPost(File originImage) async {
+  Future<StorageTaskSnapshot> uploadImageNCreateNewPost(File originImage,
+      {@required String postKey}) async {
     try {
       final File resized = await compute(getResizedImage, originImage);
-      originImage
-          .length()
-          .then((value) => print('original image size: $value'));
-      resized.length().then((value) => print('resized image size: $value'));
-      await Future.delayed(Duration(seconds: 3));
-    } catch (e) {}
+
+      final StorageReference storageReference =
+          FirebaseStorage().ref().child(_getImagePathByPostKey(postKey));
+      final StorageUploadTask uploadTask = storageReference.putFile(resized);
+      return uploadTask.onComplete;
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
+
+  String _getImagePathByPostKey(String postKey) => 'post/$postKey/post.jpg';
 }
 
 ImageNetworkRepository imageNetworkRepository = ImageNetworkRepository();
