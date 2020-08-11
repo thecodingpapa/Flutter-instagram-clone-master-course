@@ -29,21 +29,49 @@ class SharePostScreen extends StatelessWidget {
         ),
         body: ListView(
           children: <Widget>[
-            ListTile(
-              contentPadding: EdgeInsets.symmetric(
-                  vertical: common_gap, horizontal: common_gap),
-              leading: Image.file(
-                imageFile,
-                width: size.width / 6,
-                height: size.width / 6,
-                fit: BoxFit.cover,
-              ),
-              title: TextField(
-                decoration: InputDecoration(
-                    hintText: 'Write a caption...', border: InputBorder.none),
-              ),
-            ),
+            _captionWithImage(),
+            _divider,
+            _sectionButton('Tag People'),
+            _divider,
+            _sectionButton('Add Location'),
           ],
         ));
+  }
+
+  Divider get _divider => Divider(
+        color: Colors.grey[300],
+        thickness: 1,
+        height: 1,
+      );
+
+  ListTile _sectionButton(String title) {
+    return ListTile(
+      title: Text(
+        title,
+        style: TextStyle(fontWeight: FontWeight.w400),
+      ),
+      trailing: Icon(Icons.navigate_next),
+      dense: true,
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: common_gap,
+      ),
+    );
+  }
+
+  ListTile _captionWithImage() {
+    return ListTile(
+      contentPadding:
+          EdgeInsets.symmetric(vertical: common_gap, horizontal: common_gap),
+      leading: Image.file(
+        imageFile,
+        width: size.width / 6,
+        height: size.width / 6,
+        fit: BoxFit.cover,
+      ),
+      title: TextField(
+        decoration: InputDecoration(
+            hintText: 'Write a caption...', border: InputBorder.none),
+      ),
+    );
   }
 }
