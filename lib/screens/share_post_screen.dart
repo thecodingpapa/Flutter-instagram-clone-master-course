@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_tags/flutter_tags.dart';
 import 'package:instagramtworecord/constants/common_size.dart';
 import 'package:instagramtworecord/constants/screen_size.dart';
 
@@ -8,8 +9,41 @@ class SharePostScreen extends StatelessWidget {
   final File imageFile;
   final String postKey;
 
-  const SharePostScreen(this.imageFile, {Key key, @required this.postKey})
+  SharePostScreen(this.imageFile, {Key key, @required this.postKey})
       : super(key: key);
+
+  List<String> _tagItems = [
+    "approval",
+    "pigeon",
+    "brown",
+    "expenditure",
+    "compromise",
+    "citizen",
+    "inspire",
+    "relieve",
+    "grave",
+    "incredible",
+    "invasion",
+    "voucher",
+    "girl",
+    "relax",
+    "problem",
+    "queue",
+    "aviation",
+    "profile",
+    "palace",
+    "drive",
+    "money",
+    "revolutionary",
+    "string",
+    "detective",
+    "follow",
+    "text",
+    "bet",
+    "decade",
+    "means",
+    "gossip"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +68,21 @@ class SharePostScreen extends StatelessWidget {
             _sectionButton('Tag People'),
             _divider,
             _sectionButton('Add Location'),
+            Tags(
+              horizontalScroll: true,
+              itemCount: _tagItems.length,
+              heightHorizontalScroll: 30,
+              itemBuilder: (index) => ItemTags(
+                title: _tagItems[index],
+                index: index,
+                activeColor: Colors.grey[200],
+                textActiveColor: Colors.black87,
+                borderRadius: BorderRadius.circular(4),
+                elevation: 2,
+                splashColor: Colors.grey[800],
+                color: Colors.red,
+              ),
+            )
           ],
         ));
   }
