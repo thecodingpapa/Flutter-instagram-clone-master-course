@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagramtworecord/models/firestore/user_model.dart';
 import 'package:instagramtworecord/models/user_model_state.dart';
 import 'package:instagramtworecord/repo/user_network_repository.dart';
 import 'package:instagramtworecord/widgets/post.dart';
@@ -31,7 +32,11 @@ class FeedScreen extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                userNetworkRepository.getAllUsersWithoutMe().listen((users) {
+                  print(users);
+                });
+              },
               icon: ImageIcon(
                 AssetImage('assets/images/direct_message.png'),
                 color: Colors.black87,
