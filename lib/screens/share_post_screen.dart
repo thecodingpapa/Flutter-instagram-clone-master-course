@@ -13,12 +13,19 @@ import 'package:instagramtworecord/repo/post_network_repository.dart';
 import 'package:instagramtworecord/widgets/my_progress_indicator.dart';
 import 'package:provider/provider.dart';
 
-class SharePostScreen extends StatelessWidget {
+class SharePostScreen extends StatefulWidget {
   final File imageFile;
   final String postKey;
 
   SharePostScreen(this.imageFile, {Key key, @required this.postKey})
       : super(key: key);
+
+  @override
+  _SharePostScreenState createState() => _SharePostScreenState();
+}
+
+class _SharePostScreenState extends State<SharePostScreen> {
+  TextEditingController _textEditingController = TextEditingController();
 
   List<String> _tagItems = [
     "approval",
@@ -53,6 +60,12 @@ class SharePostScreen extends StatelessWidget {
     "gossip"
   ];
 
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,12 +79,13 @@ class SharePostScreen extends StatelessWidget {
                     builder: (_) => MyProgressIndicator(),
                     isDismissible: false,
                     enableDrag: false);
-                await imageNetworkRepository.uploadImage(imageFile,
-                    postKey: postKey);
+                await imageNetworkRepository.uploadImage(widget.imageFile,
+                    postKey: widget.postKey);
 
                 UserModel usermodel = Provider.of<UserModelState>(context, listen: false).userModel;
 
-                await postNetworkRepository.createNewPost(postKey, PostModel.getMapForCreatePost(userKey: usermodel.userKey, username: usermodel.username, caption: ))
+                await postNetworkRepository.createNewPost(widget.postKey, PostModel.getMapForCreatePost(userKey: usermodel.userKey, username: usermodel.username, caption: _textEditingController.text))
+                Navigator.of(context).pop();  //dismiss progress(Modal Bottom Sheet)
                 Navigator.of(context).pop();
               },
               child: Text(
@@ -145,12 +159,14 @@ class SharePostScreen extends StatelessWidget {
       contentPadding:
           EdgeInsets.symmetric(vertical: common_gap, horizontal: common_gap),
       leading: Image.file(
-        imageFile,
+        widget.imageFile,
         width: size.width / 6,
         height: size.width / 6,
         fit: BoxFit.cover,
       ),
       title: TextField(
+        controller: _textEditingController,
+        autofocus: true,
         decoration: InputDecoration(
             hintText: 'Write a caption...', border: InputBorder.none),
       ),
