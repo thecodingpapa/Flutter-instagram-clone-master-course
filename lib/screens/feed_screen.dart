@@ -32,11 +32,7 @@ class FeedScreen extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {
-                userNetworkRepository.getAllUsersWithoutMe().listen((users) {
-                  print(users);
-                });
-              },
+              onPressed: () {},
               icon: ImageIcon(
                 AssetImage('assets/images/direct_message.png'),
                 color: Colors.black87,

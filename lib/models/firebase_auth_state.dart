@@ -165,12 +165,13 @@ class FirebaseAuthState extends ChangeNotifier {
 
     final AuthResult authResult =
         await _firebaseAuth.signInWithCredential(credential);
-    final FirebaseUser user = authResult.user;
 
-    if (user == null) {
+    _firebaseUser = authResult.user;
+    if (_firebaseUser == null) {
       simpleSnackbar(context, '페북 로그인이 잘 안되떵~ 나중에 다시해봥~');
     } else {
-      _firebaseUser = user;
+      await userNetworkRepository.attemptCreateUser(
+          userKey: _firebaseUser.uid, email: _firebaseUser.email);
     }
     notifyListeners();
   }
