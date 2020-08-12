@@ -5,8 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tags/flutter_tags.dart';
 import 'package:instagramtworecord/constants/common_size.dart';
 import 'package:instagramtworecord/constants/screen_size.dart';
+import 'package:instagramtworecord/models/firestore/post_model.dart';
+import 'package:instagramtworecord/models/firestore/user_model.dart';
+import 'package:instagramtworecord/models/user_model_state.dart';
 import 'package:instagramtworecord/repo/image_network_repository.dart';
+import 'package:instagramtworecord/repo/post_network_repository.dart';
 import 'package:instagramtworecord/widgets/my_progress_indicator.dart';
+import 'package:provider/provider.dart';
 
 class SharePostScreen extends StatelessWidget {
   final File imageFile;
@@ -61,8 +66,12 @@ class SharePostScreen extends StatelessWidget {
                     builder: (_) => MyProgressIndicator(),
                     isDismissible: false,
                     enableDrag: false);
-                await imageNetworkRepository
-                    .uploadImageNCreateNewPost(imageFile, postKey: postKey);
+                await imageNetworkRepository.uploadImage(imageFile,
+                    postKey: postKey);
+
+                UserModel usermodel = Provider.of<UserModelState>(context, listen: false).userModel;
+
+                await postNetworkRepository.createNewPost(postKey, PostModel.getMapForCreatePost(userKey: usermodel.userKey, username: usermodel.username, caption: ))
                 Navigator.of(context).pop();
               },
               child: Text(
