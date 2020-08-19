@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:instagramtworecord/models/firestore/post_model.dart';
 import 'package:instagramtworecord/models/firestore/user_model.dart';
 
 class Transformers {
@@ -22,5 +23,16 @@ class Transformers {
     });
 
     sink.add(users);
+  });
+  final toPosts =
+      StreamTransformer<QuerySnapshot, List<PostModel>>.fromHandlers(
+          handleData: (snapshot, sink) async {
+    List<PostModel> posts = [];
+
+    snapshot.documents.forEach((documentSnapshot) {
+      posts.add(PostModel.fromSnapshot(documentSnapshot));
+    });
+
+    sink.add(posts);
   });
 }
