@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagramtworecord/constants/firestore_keys.dart';
+import 'package:instagramtworecord/models/firestore/post_model.dart';
+import 'package:instagramtworecord/repo/helper/transformers.dart';
 
-class PostNetworkRepository {
+class PostNetworkRepository with Transformers {
   Future<Map<String, dynamic>> createNewPost(
       String postKey, Map<String, dynamic> postData) async {
     final DocumentReference postRef =
@@ -29,6 +31,14 @@ class PostNetworkRepository {
     if (postSnapshot.exists) {
       await postRef.updateData({KEY_POSTIMG: postImg});
     }
+  }
+
+  Stream<List<PostModel>> getPostsFromSpecificUser(String userKey) {
+    return Firestore.instance
+        .collection(COLLECTION_POSTS)
+        .where(KEY_USERKEY, isEqualTo: userKey)
+        .snapshots()
+        .transform(toPosts);
   }
 }
 
