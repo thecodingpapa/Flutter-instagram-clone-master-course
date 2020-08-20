@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagramtworecord/constants/common_size.dart';
 import 'package:instagramtworecord/constants/screen_size.dart';
+import 'package:instagramtworecord/models/firestore/post_model.dart';
 import 'package:instagramtworecord/repo/image_network_repository.dart';
 import 'package:instagramtworecord/widgets/comment.dart';
 import 'package:instagramtworecord/widgets/my_progress_indicator.dart';
@@ -9,10 +10,10 @@ import 'package:instagramtworecord/widgets/rounded_avatar.dart';
 import 'package:provider/provider.dart';
 
 class Post extends StatelessWidget {
-  final int index;
+  final PostModel postModel;
 
   Post(
-    this.index, {
+    this.postModel, {
     Key key,
   }) : super(key: key);
 

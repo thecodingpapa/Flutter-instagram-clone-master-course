@@ -3,11 +3,14 @@ import 'dart:io';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:instagramtworecord/constants/screen_size.dart';
+import 'package:instagramtworecord/models/user_model_state.dart';
 import 'package:instagramtworecord/screens/camera_screen.dart';
 import 'package:instagramtworecord/screens/feed_screen.dart';
 import 'package:instagramtworecord/screens/profile_screen.dart';
 import 'package:instagramtworecord/screens/search_screen.dart';
+import 'package:instagramtworecord/widgets/my_progress_indicator.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -31,7 +34,18 @@ class _HomePageState extends State<HomePage> {
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   static List<Widget> _screens = <Widget>[
-    FeedScreen(),
+    Consumer<UserModelState>(
+      builder:
+          (BuildContext context, UserModelState userModelState, Widget child) {
+        if (userModelState == null ||
+            userModelState.userModel == null ||
+            userModelState.userModel.followings == null ||
+            userModelState.userModel.followings.isEmpty)
+          return MyProgressIndicator();
+        else
+          return FeedScreen(userModelState.userModel.followings);
+      },
+    ),
     SearchScreen(),
     Container(
       color: Colors.greenAccent,

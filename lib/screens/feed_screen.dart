@@ -10,10 +10,10 @@ import 'package:instagramtworecord/widgets/post.dart';
 import 'package:provider/provider.dart';
 
 class FeedScreen extends StatelessWidget {
-  final List<dynamic> followers;
+  final List<dynamic> followings;
 
   const FeedScreen(
-    this.followers, {
+    this.followings, {
     Key key,
   }) : super(key: key);
 
@@ -21,7 +21,7 @@ class FeedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<List<PostModel>>(
       create: (BuildContext context) =>
-          postNetworkRepository.fetchPostsFromAllFollowers(followers),
+          postNetworkRepository.fetchPostsFromAllFollowers(followings),
       child: Consumer<List<PostModel>>(
           builder: (BuildContext context, List<PostModel> posts, Widget child) {
         if (posts == null || posts.isEmpty)
