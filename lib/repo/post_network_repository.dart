@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagramtworecord/constants/firestore_keys.dart';
 import 'package:instagramtworecord/models/firestore/post_model.dart';
 import 'package:instagramtworecord/repo/helper/transformers.dart';
+import 'package:rxdart/rxdart.dart';
 
 class PostNetworkRepository with Transformers {
   Future<Map<String, dynamic>> createNewPost(
@@ -39,6 +40,22 @@ class PostNetworkRepository with Transformers {
         .where(KEY_USERKEY, isEqualTo: userKey)
         .snapshots()
         .transform(toPosts);
+  }
+
+  Stream<List<PostModel>> fetchPostsFromAllFollowers(List<dynamic> followers) {
+    final CollectionReference collectionRefernce =
+        Firestore.instance.collection(COLLECTION_POSTS);
+    List<Stream<List<PostModel>>> streams = [];
+
+    for (final follower in followers) {
+      streams.add(collectionRefernce
+          .where(KEY_USERKEY, isEqualTo: follower)
+          .snapshots()
+          .transform(toPosts));
+    }
+    return CombineLatestStream.list<List<PostModel>>(streams)
+        .transform(combineListOfPosts)
+        .transform(latestToTop);
   }
 }
 
