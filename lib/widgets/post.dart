@@ -26,7 +26,8 @@ class Post extends StatelessWidget {
         _postImage(),
         _postActions(),
         _postLikes(),
-        _postCaption()
+        _postCaption(),
+        _lastComment()
       ],
     );
   }
@@ -37,8 +38,20 @@ class Post extends StatelessWidget {
           horizontal: common_gap, vertical: common_xxs_gap),
       child: Comment(
         showImage: false,
-        username: 'testingUser',
-        text: 'I have money!!!!',
+        username: postModel.username,
+        text: postModel.caption,
+      ),
+    );
+  }
+
+  Widget _lastComment() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          horizontal: common_gap, vertical: common_xxs_gap),
+      child: Comment(
+        showImage: false,
+        username: postModel.lastCommentor,
+        text: postModel.lastComment,
       ),
     );
   }
@@ -47,7 +60,7 @@ class Post extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: common_gap),
       child: Text(
-        '12000 likes',
+        '${postModel.numOfLikes == null ? 0 : postModel.numOfLikes.length} likes',
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
@@ -88,7 +101,7 @@ class Post extends StatelessWidget {
           padding: const EdgeInsets.all(common_xxs_gap),
           child: RoundedAvatar(),
         ),
-        Expanded(child: Text('username')),
+        Expanded(child: Text(postModel.username)),
         IconButton(
           onPressed: null,
           icon: Icon(
@@ -105,30 +118,21 @@ class Post extends StatelessWidget {
       containerSize: size.width,
     );
 
-    return FutureBuilder<dynamic>(
-        future: imageNetworkRepository
-            .getPostImageUrl("1597128255009_nwKTMEe847Ssvfi2aAlSS0QUzVP2"),
-        builder: (context, snapshot) {
-          if (snapshot.hasData)
-            return CachedNetworkImage(
-              imageUrl: snapshot.data.toString(),
-              placeholder: (BuildContext context, String url) {
-                return progress;
-              },
-              imageBuilder:
-                  (BuildContext context, ImageProvider imageProvider) {
-                return AspectRatio(
-                  aspectRatio: 1,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: imageProvider, fit: BoxFit.cover)),
-                  ),
-                );
-              },
-            );
-          else
-            return progress;
-        });
+    return CachedNetworkImage(
+      imageUrl: postModel.postImg,
+      placeholder: (BuildContext context, String url) {
+        return progress;
+      },
+      imageBuilder: (BuildContext context, ImageProvider imageProvider) {
+        return AspectRatio(
+          aspectRatio: 1,
+          child: Container(
+            decoration: BoxDecoration(
+                image:
+                    DecorationImage(image: imageProvider, fit: BoxFit.cover)),
+          ),
+        );
+      },
+    );
   }
 }
