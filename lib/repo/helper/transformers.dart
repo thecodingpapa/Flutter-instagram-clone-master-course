@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:instagramtworecord/models/firestore/comment_model.dart';
 import 'package:instagramtworecord/models/firestore/post_model.dart';
 import 'package:instagramtworecord/models/firestore/user_model.dart';
 
@@ -34,6 +35,17 @@ class Transformers {
     });
 
     sink.add(posts);
+  });
+  final toComments =
+      StreamTransformer<QuerySnapshot, List<CommentModel>>.fromHandlers(
+          handleData: (snapshot, sink) async {
+    List<CommentModel> comments = [];
+
+    snapshot.documents.forEach((documentSnapshot) {
+      comments.add(CommentModel.fromSnapshot(documentSnapshot));
+    });
+
+    sink.add(comments);
   });
   final combineListOfPosts =
       StreamTransformer<List<List<PostModel>>, List<PostModel>>.fromHandlers(

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagramtworecord/constants/firestore_keys.dart';
+import 'package:instagramtworecord/models/firestore/comment_model.dart';
 import 'package:instagramtworecord/repo/helper/transformers.dart';
 
 class CommentNetworkRepository with Transformers {
@@ -24,5 +25,15 @@ class CommentNetworkRepository with Transformers {
         });
       }
     });
+  }
+
+  Stream<List<CommentModel>> fetchAllComments(String postKey) {
+    return Firestore.instance
+        .collection(COLLECTION_POSTS)
+        .document(postKey)
+        .collection(COLLECTION_COMMENTS)
+        .orderBy(KEY_COMMENTTIME)
+        .snapshots()
+        .transform(toComments);
   }
 }
