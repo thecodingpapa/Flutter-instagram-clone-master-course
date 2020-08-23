@@ -20,8 +20,8 @@ class CommentNetworkRepository with Transformers {
         await tx.update(postRef, {
           KEY_NUMOFCOMMENTS: numOfComments + 1,
           KEY_LASTCOMMENT: commentData[KEY_COMMENT],
-          KEY_LASTCOMMENTTIME: commentData[KEY_LASTCOMMENTTIME],
-          KEY_LASTCOMMENTOR: commentData[KEY_LASTCOMMENTOR],
+          KEY_LASTCOMMENTTIME: commentData[KEY_COMMENTTIME],
+          KEY_LASTCOMMENTOR: commentData[KEY_USERNAME],
         });
       }
     });
