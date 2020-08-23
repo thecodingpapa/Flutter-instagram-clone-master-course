@@ -4,6 +4,7 @@ import 'package:instagramtworecord/constants/common_size.dart';
 import 'package:instagramtworecord/constants/screen_size.dart';
 import 'package:instagramtworecord/models/firestore/post_model.dart';
 import 'package:instagramtworecord/repo/image_network_repository.dart';
+import 'package:instagramtworecord/screens/comments_screen.dart';
 import 'package:instagramtworecord/widgets/comment.dart';
 import 'package:instagramtworecord/widgets/my_progress_indicator.dart';
 import 'package:instagramtworecord/widgets/rounded_avatar.dart';
@@ -24,7 +25,7 @@ class Post extends StatelessWidget {
       children: <Widget>[
         _postHeader(),
         _postImage(),
-        _postActions(),
+        _postActions(context),
         _postLikes(),
         _postCaption(),
         _lastComment()
@@ -66,7 +67,7 @@ class Post extends StatelessWidget {
     );
   }
 
-  Row _postActions() {
+  Row _postActions(BuildContext context) {
     return Row(
       children: <Widget>[
         IconButton(
@@ -75,7 +76,12 @@ class Post extends StatelessWidget {
           color: Colors.black87,
         ),
         IconButton(
-          onPressed: null,
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (BuildContext context) {
+              return CommentsScreen();
+            }));
+          },
           icon: ImageIcon(AssetImage('assets/images/comment.png')),
           color: Colors.black87,
         ),
