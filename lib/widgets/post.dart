@@ -79,7 +79,7 @@ class Post extends StatelessWidget {
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (BuildContext context) {
-              return CommentsScreen();
+              return CommentsScreen(postModel.postKey);
             }));
           },
           icon: ImageIcon(AssetImage('assets/images/comment.png')),
