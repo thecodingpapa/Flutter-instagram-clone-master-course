@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagramtworecord/screens/profile_screen.dart';
 import 'package:instagramtworecord/widgets/fade_stack.dart';
-import 'package:instagramtworecord/widgets/sign_in_form.dart';
-import 'package:instagramtworecord/widgets/sign_up_form.dart';
 
 class AuthScreen extends StatefulWidget {
   @override
@@ -22,18 +19,6 @@ class _AuthScreenState extends State<AuthScreen> {
             FadeStack(
               selectedForm: selectedForm,
             ),
-            Container(
-              child: FlatButton(
-                onPressed: () {
-                  setState(() {
-                    if (selectedForm == 0) {
-                      selectedForm = 1;
-                    } else {
-                      selectedForm = 0;
-                    }
-                  });
-                },
-                child: Text('go to Sign up'),
             Positioned(
               left: 0,
               right: 0,
@@ -45,24 +30,23 @@ class _AuthScreenState extends State<AuthScreen> {
                   shape: Border(top: BorderSide(color: Colors.grey)),
                   onPressed: () {
                     setState(() {
-                      if (currentWidget is SignUpForm) {
-                        currentWidget = signInForm;
+                      if (selectedForm == 0) {
+                        selectedForm = 1;
                       } else {
-                        currentWidget = signUpForm;
+                        selectedForm = 0;
                       }
                     });
                   },
                   child: RichText(
                     text: TextSpan(
-                        text: (currentWidget is SignUpForm)
+                        text: (selectedForm == 0)
                             ? "Already have an account? "
                             : "Don't have an account? ",
                         style: TextStyle(color: Colors.grey),
                         children: [
                           TextSpan(
-                              text: (currentWidget is SignUpForm)
-                                  ? "Sign In "
-                                  : "Sing Up",
+                              text:
+                                  (selectedForm == 0) ? "Sign In " : "Sing Up",
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontWeight: FontWeight.bold)),
