@@ -10,15 +10,11 @@ class FirebaseAuthState extends ChangeNotifier {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   FirebaseUser _firebaseUser;
   FacebookLogin _facebookLogin;
-  bool initiated = false;
 
   void watchAuthChange() {
     _firebaseAuth.onAuthStateChanged.listen((firebaseUser) {
       if (firebaseUser == null && _firebaseUser == null) {
-        if (initiated)
-          changeFirebaseAuthStatus();
-        else
-          initiated = true;
+        changeFirebaseAuthStatus();
         return;
       } else if (firebaseUser != _firebaseUser) {
         _firebaseUser = firebaseUser;
