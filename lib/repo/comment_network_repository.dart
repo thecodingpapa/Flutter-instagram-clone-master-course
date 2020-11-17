@@ -32,7 +32,7 @@ class CommentNetworkRepository with Transformers {
         .collection(COLLECTION_POSTS)
         .document(postKey)
         .collection(COLLECTION_COMMENTS)
-        .orderBy(KEY_COMMENTTIME)
+        .orderBy(KEY_COMMENTTIME, descending: true)
         .snapshots()
         .transform(toComments);
   }

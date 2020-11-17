@@ -61,6 +61,8 @@ class MyApp extends StatelessWidget {
         .getUserModelStream(firebaseAuthState.firebaseUser.uid)
         .listen((userModel) {
       userModelState.userModel = userModel;
+
+      print('userModel: ${userModel.username} , ${userModel.userKey}');
     });
   }
 
