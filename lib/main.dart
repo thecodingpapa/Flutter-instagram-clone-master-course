@@ -57,13 +57,15 @@ class MyApp extends StatelessWidget {
     UserModelState userModelState =
         Provider.of<UserModelState>(context, listen: false);
 
-    userModelState.currentStreamSub = userNetworkRepository
-        .getUserModelStream(firebaseAuthState.firebaseUser.uid)
-        .listen((userModel) {
-      userModelState.userModel = userModel;
+    if (userModelState.currentStreamSub == null) {
+      userModelState.currentStreamSub = userNetworkRepository
+          .getUserModelStream(firebaseAuthState.firebaseUser.uid)
+          .listen((userModel) {
+        userModelState.userModel = userModel;
 
-      print('userModel: ${userModel.username} , ${userModel.userKey}');
-    });
+        print('userModel: ${userModel.username} , ${userModel.userKey}');
+      });
+    }
   }
 
   void _clearUserModel(BuildContext context) {
