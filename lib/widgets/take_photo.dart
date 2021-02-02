@@ -63,7 +63,7 @@ class _TakePhotoState extends State<TakePhoto> {
           fit: BoxFit.fitWidth,
           child: Container(
               width: size.width,
-              height: size.width / cameraState.controller.value.aspectRatio,
+              height: size.width * cameraState.controller.value.aspectRatio,
               child: CameraPreview(cameraState.controller)),
         ),
       ),
@@ -74,11 +74,11 @@ class _TakePhotoState extends State<TakePhoto> {
     final String postKey = getNewPostKey(
         Provider.of<UserModelState>(context, listen: false).userModel);
     try {
-      final path = join((await getTemporaryDirectory()).path, '$postKey.png');
+      // final path = join((await getTemporaryDirectory()).path, '$postKey.png');
 
-      await cameraState.controller.takePicture(path);
+      XFile pictureTaken = await cameraState.controller.takePicture();
 
-      File imageFile = File(path);
+      File imageFile = File(pictureTaken.path);
       Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => SharePostScreen(
                 imageFile,
