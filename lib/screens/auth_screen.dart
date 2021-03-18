@@ -25,9 +25,10 @@ class _AuthScreenState extends State<AuthScreen> {
               bottom: 0,
               height: 40,
               child: Container(
-                color: Colors.white,
-                child: FlatButton(
-                  shape: Border(top: BorderSide(color: Colors.grey)),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border(top: BorderSide(color: Colors.grey))),
+                child: TextButton(
                   onPressed: () {
                     setState(() {
                       if (selectedForm == 0) {

@@ -72,11 +72,11 @@ class _CameraScreenState extends State<CameraScreen> {
           unselectedItemColor: Colors.black54,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Icons.radio_button_checked), title: Text('GALLERY')),
+                icon: Icon(Icons.radio_button_checked), label: 'GALLERY'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.radio_button_checked), title: Text('PHOTO')),
+                icon: Icon(Icons.radio_button_checked), label: 'PHOTO'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.radio_button_checked), title: Text('VIDEO')),
+                icon: Icon(Icons.radio_button_checked), label: 'VIDEO'),
           ],
           currentIndex: _currentIndex,
           onTap: _onItemTabbed,
